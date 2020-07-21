@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     puts session
     redirect "users/#{@user.id}"
   else
-
+    
     end
   end
 
@@ -36,6 +36,7 @@ class UsersController < ApplicationController
     redirect "/users/#{@user.id}" #redirect - url - new get/http request; interpolate
   else
     #not a valid input
+    redirect '/signup'
     end
   end
 
