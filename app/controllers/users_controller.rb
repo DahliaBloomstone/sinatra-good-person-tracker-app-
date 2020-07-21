@@ -28,14 +28,23 @@ class UsersController < ApplicationController
   end
 
   post '/users' do
-    binding.pry
-    #create a new user and persist the new user to the database 
+    # binding.pry
+    # create a new user and persist the new user to the database
+    # params will look like: => {"name"=>"Poop", "email"=>"Poop@gmail.com", "password"=>"password "}
+  if params[:name] != "" && params[:email] != "" && params[:password] != ""
+    @user = User.create(params)
+    redirect "/users/#{@user.id}" #redirect - url - new get/http request; interpolate
+  else
+    #not a valid input 
+    end
   end
 
 
-# show route
+#user show route
+# /:id telling sinatra piece of URL is going to be dynamic, will change from one user to another
+# id = key in the params hash
   get '/users/:id' do
-    "user show route"
+    erb ':/users/show' #file path
   end
 
 end
