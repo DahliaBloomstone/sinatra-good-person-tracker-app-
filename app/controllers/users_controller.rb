@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @user = User.create(params)
     redirect "/users/#{@user.id}" #redirect - url - new get/http request; interpolate
   else
-    #not a valid input 
+    #not a valid input
     end
   end
 
@@ -44,7 +44,10 @@ class UsersController < ApplicationController
 # /:id telling sinatra piece of URL is going to be dynamic, will change from one user to another
 # id = key in the params hash
   get '/users/:id' do
-    erb ':/users/show' #file path
+    # raise params.inspect
+    @user = User.find_by(id: params[:id])
+     # binding.pry => params => {"id"=>"4"}
+    erb :'/users/show' #file path
   end
 
 end
