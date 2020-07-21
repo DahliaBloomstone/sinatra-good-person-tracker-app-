@@ -8,4 +8,5 @@ use Rack::MethodOverride
 
 #here is where I mount other controllers with 'use'
 use UsersController
+use GoodDeedsController
 run ApplicationController
