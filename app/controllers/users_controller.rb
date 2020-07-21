@@ -28,8 +28,10 @@ class UsersController < ApplicationController
   end
 
   post '/users' do
-    
+    binding.pry
+    #create a new user and persist the new user to the database 
   end
+
 
 # show route
   get '/users/:id' do
