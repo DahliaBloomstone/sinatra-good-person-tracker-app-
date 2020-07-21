@@ -21,8 +21,11 @@ end
   end
 end
 
-# show route for a good deed
+# show route for a good deed entry
+get '/good_deeds/:id' do
+  @good_deeds = GoodDeed.find(params[:id])
 
+end
 
 # index route for all good deeds
 
