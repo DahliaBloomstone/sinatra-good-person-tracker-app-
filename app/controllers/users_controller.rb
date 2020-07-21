@@ -40,14 +40,20 @@ class UsersController < ApplicationController
   end
 
 
-#user show route
+#user SHOW route
 # /:id telling sinatra piece of URL is going to be dynamic, will change from one user to another
 # id = key in the params hash
   get '/users/:id' do
     # raise params.inspect
     @user = User.find_by(id: params[:id])
-     # binding.pry => params => {"id"=>"4"}
+     # ex: binding.pry => params => {"id"=>"4"}
     erb :'/users/show' #file path
   end
+
+get '/logout' do
+  session.clear
+  redirect '/'
+  end
+
 
 end
