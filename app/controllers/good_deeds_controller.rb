@@ -6,7 +6,20 @@ get '/good_deeds/new' do
 end
 
 # post good_deeds to create a new good deed
-
+# create a new journal entry and save it to the database
+# only save entry if there is content
+# only create entry if user is logged in
+post '/good_deeds' do
+  if !logged_in?
+    redirect '/'
+end
+  if params[:content] != ""
+    @good_deed = GoodDeed.create(content: params[:content], user_id: current_user.id)
+    redirect "/good_deeds/#{@good_deeds.id}"
+  else
+    redirect '/good_deeds/new'
+  end
+end
 
 # show route for a good deed
 
