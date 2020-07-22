@@ -3,7 +3,7 @@ class GoodDeedsController < ApplicationController
 
 get '/good_deeds' do
   @good_deeds = GoodDeed.all #instance variable to access the corresponding view
-  erb :'good_deeds/index' #file reference vs redirect which is a route 
+  erb :'good_deeds/index' #file reference vs redirect which is a route
 end
 
 # get good_deeds/new to render a form to create a new entry
@@ -41,7 +41,7 @@ end
 get '/good_deeds/:id/edit' do
 set_good_deed_entry
 if logged_in?
-  if @good_deed.user == current_user
+  if authorized_to_edit(@good_deed) 
   erb :'/good_deeds/edit'
 else
   redirect "users/#{current_user.id}"

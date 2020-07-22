@@ -15,7 +15,6 @@ class ApplicationController < Sinatra::Base
     else
     erb :welcome
     end
-  end
 
   helpers do
 
@@ -25,8 +24,15 @@ class ApplicationController < Sinatra::Base
 
   def current_user
   @current_user ||= User.find_by(id: session[:user_id])
+      end
+
+def authorized_to_edit?(good_deed)
+  good_deed.user == current_user
     end
 
   end
+
+end
+
 
 end

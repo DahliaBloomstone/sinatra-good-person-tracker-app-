@@ -2,7 +2,8 @@ SHOW PAGE FOR A GOOD DEED
 
 <p><%= @good_deed.content %></p>
 
-edit link
-<a href="/good_deeds/<%= @good_deed.id %>/edit">Edit Entry</a> 
+<% if authorized_to_edit?(@good_deed) %>
+<a href="/good_deeds/<%= @good_deed.id %>/edit">Edit Entry</a>
 
-delete link
+Delete link
+<% end %>
