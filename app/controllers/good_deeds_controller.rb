@@ -30,6 +30,7 @@ end
 # route should send us to good_deeds/edit.erb
 # render an edit form
 get '/good_deeds/:id/edit' do
+  @good_deed = GoodDeed.find(params[:id])
   erb :'/good_deeds/edit'
 end
 # index route for all good deeds
