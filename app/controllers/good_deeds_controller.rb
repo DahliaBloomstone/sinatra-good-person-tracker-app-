@@ -15,7 +15,7 @@ post '/good_deeds' do
 end
   if params[:content] != ""
     @good_deed = GoodDeed.create(content: params[:content], user_id: current_user.id)
-    redirect "/good_deeds/#{@good_deeds.id}"
+    redirect "/good_deeds/#{@good_deed.id}"
   else
     redirect '/good_deeds/new'
   end
@@ -23,10 +23,15 @@ end
 
 # show route for a good deed entry
 get '/good_deeds/:id' do
-  @good_deeds = GoodDeed.find(params[:id])
-
+  @good_deed = GoodDeed.find(params[:id])
+  erb :'/good_deeds/show'
 end
 
+# route should send us to good_deeds/edit.erb
+# render an edit form
+get '/good_deeds/:id/edit' do
+  erb :'/good_deeds/edit'
+end
 # index route for all good deeds
 
 
