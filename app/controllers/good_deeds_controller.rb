@@ -33,6 +33,14 @@ get '/good_deeds/:id/edit' do
   @good_deed = GoodDeed.find(params[:id])
   erb :'/good_deeds/edit'
 end
+
+# This actiion's job is to...
+# Find the Good Deed Entry
+# Modify the/update the entry
+# Where to go / redirect to show page
+patch '/good_deeds/:id' do
+  
+end
 # index route for all good deeds
 
 
