@@ -2,8 +2,14 @@ SHOW PAGE FOR A GOOD DEED
 
 <p><%= @good_deed.content %></p>
 
-<% if authorized_to_edit?(@good_deed) %>
+<% if authorized_to_edit?(@good_deed)  %>
 <a href="/good_deeds/<%= @good_deed.id %>/edit">Edit Entry</a>
+<br><br> 
+<form class="" action="/good_deeds/<%= @good_deed.id %>"
+  method="post">
 
-Delete link
+  <!-- Delete request??-->
+  <input type="hidden" name="_method" value="DELETE">
+   <input type="submit" name="" value="Delete this Entry">
+</form>
 <% end %>

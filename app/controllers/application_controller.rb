@@ -30,9 +30,14 @@ def authorized_to_edit?(good_deed)
   good_deed.user == current_user
     end
 
+#HELPER METHOD FOR REDIRECTING IF NOT LOGGED IN
+
+
+
   end
 
 end
+
 
 
 end

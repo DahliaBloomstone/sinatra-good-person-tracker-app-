@@ -38,18 +38,16 @@ end
 
 # route should send us to good_deeds/edit.erb
 # render an edit form
-get '/good_deeds/:id/edit' do
-set_good_deed_entry
-if logged_in?
-  if authorized_to_edit(@good_deed) 
-  erb :'/good_deeds/edit'
-else
-  redirect "users/#{current_user.id}"
-  end
-else
-  redirect '/'
+get '/journal_entries/:id/edit' do
+  redirect_if_not_logged_in
+  set_journal_entry
+  if authorized_to_edit?(@journal_entry)
+    erb :'/journal_entries/edit'
+  else
+    redirect "users/#{current_user.id}"
   end
 end
+
 
 # This actiion's job is to...
 # Find the Good Deed Entry
@@ -71,6 +69,20 @@ end
 # binding.pry
 # in browser: http://167.99.15.173:44406/good_deeds/1/edit, =>  {"_method"=>"patch","content"=>"I recycled.\" only a little bit though.", "id"=>"1"}
 # Added the ability to edit an entry:
+
+delete '/good_deeds/:id' do
+  set_good_deed_entry
+  if authorized_to_edit?(@good_deed)
+    @good_deed.destroy
+    #delete the entry, go somewhere..redirect. Why redirect? separation of concerns
+    redirect '/good_deeds'
+  else
+      #go somewhere else not deleted
+      redirect '/good_deeds '
+  end
+end
+
+
 
 # index route for all good deeds
 
