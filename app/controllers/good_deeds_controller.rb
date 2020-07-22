@@ -23,14 +23,17 @@ end
 
 # show route for a good deed entry
 get '/good_deeds/:id' do
-  @good_deed = GoodDeed.find(params[:id])
+set_good_deed_entry
+# binding.pry
+# params  => {"id"=>"3"}
+# @good_deed => id: 3, content: "I donated more money!", user_id: 1,
   erb :'/good_deeds/show'
 end
 
 # route should send us to good_deeds/edit.erb
 # render an edit form
 get '/good_deeds/:id/edit' do
-  @good_deed = GoodDeed.find(params[:id])
+set_good_deed_entry
   erb :'/good_deeds/edit'
 end
 
@@ -39,10 +42,13 @@ end
 # Modify the/update the entry
 # Where to go / redirect to show page
 patch '/good_deeds/:id' do
-  
+set_good_deed_entry
 end
 # index route for all good deeds
 
-
+private #something we're not gonna call anywhere else
+def set_good_deed_entry
+  @good_deed = GoodDeed.find(params[:id])
+  end
 
 end
