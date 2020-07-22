@@ -1,6 +1,11 @@
 class GoodDeedsController < ApplicationController
   #binding.pry self.class => GoodDeedsController
 
+get '/good_deeds' do
+  @good_deeds = GoodDeed.all #instance variable to access the corresponding view
+  erb :'good_deeds/index' #file reference vs redirect which is a route 
+end
+
 # get good_deeds/new to render a form to create a new entry
 get '/good_deeds/new' do
   erb :'/good_deeds/new'
