@@ -1,4 +1,5 @@
 class GoodDeedsController < ApplicationController
+  #binding.pry self.class => GoodDeedsController
 
 # get good_deeds/new to render a form to create a new entry
 get '/good_deeds/new' do
@@ -43,7 +44,13 @@ end
 # Where to go / redirect to show page
 patch '/good_deeds/:id' do
 set_good_deed_entry
+# binding.pry
+# in browser: http://167.99.15.173:44406/good_deeds/1/edit, =>  {"_method"=>"patch","content"=>"I recycled.\" only a little bit though.", "id"=>"1"}
+# Added the ability to edit an entry: 
+  @good_deed.update({content: params[:content]}) #hash
+  redirect "/good_deeds/#{@good_deed.id}"
 end
+
 # index route for all good deeds
 
 private #something we're not gonna call anywhere else
