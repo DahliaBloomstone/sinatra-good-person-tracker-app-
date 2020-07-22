@@ -35,7 +35,15 @@ end
 # render an edit form
 get '/good_deeds/:id/edit' do
 set_good_deed_entry
+if logged_in?
+  if @good_deed.user == current_user
   erb :'/good_deeds/edit'
+else
+  redirect "users/#{current_user.id}"
+  end
+else
+  redirect '/'
+  end
 end
 
 # This actiion's job is to...
@@ -44,12 +52,20 @@ end
 # Where to go / redirect to show page
 patch '/good_deeds/:id' do
 set_good_deed_entry
+if logged_in?
+  if @good_deed.user == current_user
+    @good_deed.update({content: params[:content]}) #hash
+    redirect "/good_deeds/#{@good_deed.id}"
+  else
+    redirect "users/#{current_user.id}"
+  end
+else
+  redirect '/'
+  end
+end
 # binding.pry
 # in browser: http://167.99.15.173:44406/good_deeds/1/edit, =>  {"_method"=>"patch","content"=>"I recycled.\" only a little bit though.", "id"=>"1"}
-# Added the ability to edit an entry: 
-  @good_deed.update({content: params[:content]}) #hash
-  redirect "/good_deeds/#{@good_deed.id}"
-end
+# Added the ability to edit an entry:
 
 # index route for all good deeds
 
