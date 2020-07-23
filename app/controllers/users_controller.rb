@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 # what routes do I need for login?
 # route: render the login page
   get '/login' do
+    puts "**** FLASH IS "
+    puts flash
     erb :login
   end
 
@@ -11,12 +13,13 @@ class UsersController < ApplicationController
 # Steps: Find user, authenticate user, log in user, redirect to user landing page
   post '/login' do
   @user = User.find_by(email: params[:email])
-  if @user.authenticate(params[:password])
+  if @user && @user.authenticate(params[:password])
     session[:user_id] = @user.id #actually logging the user in
     puts session
     redirect "users/#{@user.id}"
   else
-    
+    flash[:message] = "Invalid Login! Sign up or try again!"
+    redirect '/login'
     end
   end
 
