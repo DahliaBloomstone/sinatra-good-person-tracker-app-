@@ -55,7 +55,7 @@ end
 patch '/good_deeds/:id' do
 set_good_deed_entry
 if logged_in?
-  if @good_deed.user == current_user
+  if @good_deed.user == current_user && params[:content] != ""
     @good_deed.update({content: params[:content]}) #hash
     redirect "/good_deeds/#{@good_deed.id}"
   else
