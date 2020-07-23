@@ -2,8 +2,8 @@ ALL GOOD DEEDS
 <p> </p>
 <% @good_deeds.each do |good_deed| %>
   <h4><a href="/good_deeds/<%= good_deed.id %>"><%=
-    good_deed.created_at %></a></h4>
+    good_deed.formatted_created_at %></a></h4>
     <p><%= good_deed.content %></p>
-    <p> By <%= good_deed.user.name %></p> 
+    <p> By <%= good_deed.user.name %></p>
 <br><br>
 <% end %>

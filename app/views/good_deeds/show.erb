@@ -2,6 +2,9 @@ GOOD DEED OF THE DAY:
 
 <p><%= @good_deed.content %></p>
 
+<p>Created by: <%= @good_deed.user.name %></p>
+<p>Created on: <%= @good_deed.formatted_created_at %></p>
+
 <% if authorized_to_edit?(@good_deed)  %>
 <a href="/good_deeds/<%= @good_deed.id %>/edit">Edit Entry</a>
 <br><br>
