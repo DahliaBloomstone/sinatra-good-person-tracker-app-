@@ -3,8 +3,6 @@ class UsersController < ApplicationController
 # what routes do I need for login?
 # route: render the login page
   get '/login' do
-    puts "**** FLASH IS "
-    puts flash
     erb :login
   end
 
@@ -16,9 +14,10 @@ class UsersController < ApplicationController
   if @user && @user.authenticate(params[:password])
     session[:user_id] = @user.id #actually logging the user in
     puts session
+    flash[:message] = "Hello There, #{@user.name}!"
     redirect "users/#{@user.id}"
   else
-    flash[:message] = "Invalid Login! Sign up or try again!"
+    flash[:errors] = "Invalid Login! Sign up or try again!"
     redirect '/login'
     end
   end
@@ -36,8 +35,13 @@ class UsersController < ApplicationController
     # params will look like: => {"name"=>"Poop", "email"=>"Poop@gmail.com", "password"=>"password "}
   if params[:name] != "" && params[:email] != "" && params[:password] != ""
     @user = User.create(params)
+    session[:user_id] = @user.id #logging user in
     redirect "/users/#{@user.id}" #redirect - url - new get/http request; interpolate
+flash[:message] = "Welcome new user, #{@user.name}! You have a new good person tracker account!"
   else
+    # binding.pry
+    # => {"name"=>"", "email"=>"ooo", "password"=>""} 
+    flash[:errors] = "Failed to create a new account :("
     #not a valid input
     redirect '/signup'
     end

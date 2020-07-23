@@ -7,10 +7,11 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "good_person_tracker"
-    register Sinatra::Flash 
+    register Sinatra::Flash
   end
 
   get "/" do
+  #  binding.pry
     if logged_in?
       redirect "/users/#{current_user.id}"
     else
