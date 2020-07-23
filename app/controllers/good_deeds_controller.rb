@@ -25,7 +25,7 @@ end
     @good_deed = GoodDeed.create(content: params[:content], user_id: current_user.id)
     redirect "/good_deeds/#{@good_deed.id}"
   else
-    flash[:error] = "Something went wrong! Enter content! :("
+    flash[:errors] = "You didn't type anything! Stupid idiot! Enter content! :("
     redirect '/good_deeds/new'
   end
 end
@@ -77,12 +77,11 @@ delete '/good_deeds/:id' do
     #delete the entry, go somewhere..redirect. Why redirect? separation of concerns
     redirect '/good_deeds'
   else
+  #  flash[:errors] = "You didn't delete your entry! :("
       #go somewhere else not deleted
       redirect '/good_deeds '
   end
 end
-
-# index route for all good deeds
 
 private #something we're not gonna call anywhere else
 def set_good_deed_entry
