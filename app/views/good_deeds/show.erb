@@ -1,10 +1,10 @@
-SHOW PAGE FOR A GOOD DEED
+GOOD DEED OF THE DAY:
 
 <p><%= @good_deed.content %></p>
 
 <% if authorized_to_edit?(@good_deed)  %>
 <a href="/good_deeds/<%= @good_deed.id %>/edit">Edit Entry</a>
-<br><br> 
+<br><br>
 <form class="" action="/good_deeds/<%= @good_deed.id %>"
   method="post">
 

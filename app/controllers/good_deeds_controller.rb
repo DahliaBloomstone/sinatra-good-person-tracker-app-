@@ -51,7 +51,6 @@ get '/good_deeds/:id/edit' do
   end
 end
 
-
 # This action's job is to...
 # Find the Good Deed Entry
 # Modify the/update the entry
@@ -82,8 +81,6 @@ delete '/good_deeds/:id' do
       redirect '/good_deeds '
   end
 end
-
-
 
 # index route for all good deeds
 
