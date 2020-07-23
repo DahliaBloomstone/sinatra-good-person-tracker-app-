@@ -33,15 +33,15 @@ class UsersController < ApplicationController
     # binding.pry
     # create a new user and persist the new user to the database
     # params will look like: => {"name"=>"Poop", "email"=>"Poop@gmail.com", "password"=>"password "}
-  if params[:name] != "" && params[:email] != "" && params[:password] != ""
-    @user = User.create(params)
+    @user = User.new(params) # new vs create. create=saves/persists in database. new=instantiates new object.
+  if @user.save
     session[:user_id] = @user.id #logging user in
     redirect "/users/#{@user.id}" #redirect - url - new get/http request; interpolate
 flash[:message] = "Welcome new user, #{@user.name}! You have a new good person tracker account!"
   else
     # binding.pry
-    # => {"name"=>"", "email"=>"ooo", "password"=>""} 
-    flash[:errors] = "Failed to create a new account :("
+    # => {"name"=>"", "email"=>"ooo", "password"=>""}
+    flash[:errors] = "Failed to create a new account: #{@user.errors.full_messages.to_sentence} :("
     #not a valid input
     redirect '/signup'
     end
