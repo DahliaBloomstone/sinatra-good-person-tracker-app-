@@ -55,6 +55,7 @@ flash[:message] = "Welcome new user, #{@user.name}! You have a new good person t
     # raise params.inspect
     @user = User.find_by(id: params[:id])
      # ex: binding.pry => params => {"id"=>"4"}
+     redirect_if_not_logged_in
     erb :'/users/show' #file path
   end
 

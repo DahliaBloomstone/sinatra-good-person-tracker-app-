@@ -20,9 +20,12 @@ post '/good_deeds' do
     redirect '/'
 end
   if params[:content] != ""
+    #create new entry
+    flash[:message] = "Good deed successfully created!"
     @good_deed = GoodDeed.create(content: params[:content], user_id: current_user.id)
     redirect "/good_deeds/#{@good_deed.id}"
   else
+    flash[:error] = "Something went wrong! Enter content! :("
     redirect '/good_deeds/new'
   end
 end
@@ -40,6 +43,7 @@ end
 # render an edit form
 get '/good_deeds/:id/edit' do
   set_good_deed_entry
+  redirect_if_not_logged_in
   if authorized_to_edit?(@good_deed)
     erb :'/good_deeds/edit'
   else
@@ -48,21 +52,18 @@ get '/good_deeds/:id/edit' do
 end
 
 
-# This actiion's job is to...
+# This action's job is to...
 # Find the Good Deed Entry
 # Modify the/update the entry
 # Where to go / redirect to show page
 patch '/good_deeds/:id' do
 set_good_deed_entry
-if logged_in?
+redirect_if_not_logged_in
   if @good_deed.user == current_user && params[:content] != ""
     @good_deed.update({content: params[:content]}) #hash
     redirect "/good_deeds/#{@good_deed.id}"
   else
     redirect "users/#{current_user.id}"
-  end
-else
-  redirect '/'
   end
 end
 # binding.pry
@@ -73,6 +74,7 @@ delete '/good_deeds/:id' do
   set_good_deed_entry
   if authorized_to_edit?(@good_deed)
     @good_deed.destroy
+    flash[:message] = "Yay! You deleted your good deed entry"
     #delete the entry, go somewhere..redirect. Why redirect? separation of concerns
     redirect '/good_deeds'
   else

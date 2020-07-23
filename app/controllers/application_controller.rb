@@ -34,6 +34,14 @@ def authorized_to_edit?(good_deed)
     end
 
 #HELPER METHOD FOR REDIRECTING IF NOT LOGGED IN
+def redirect_if_not_logged_in
+  if !logged_in?
+    flash[:errors] = "You are not logged in!"
+    redirect '/'
+  end
+end
+
+
 
   end
 end
