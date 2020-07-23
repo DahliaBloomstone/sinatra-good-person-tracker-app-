@@ -14,7 +14,8 @@ class ApplicationController < Sinatra::Base
       redirect "/users/#{current_user.id}"
     else
     erb :welcome
-    end
+  end
+end
 
   helpers do
 
@@ -24,7 +25,7 @@ class ApplicationController < Sinatra::Base
 
   def current_user
   @current_user ||= User.find_by(id: session[:user_id])
-      end
+  end
 
 def authorized_to_edit?(good_deed)
   good_deed.user == current_user
@@ -32,12 +33,5 @@ def authorized_to_edit?(good_deed)
 
 #HELPER METHOD FOR REDIRECTING IF NOT LOGGED IN
 
-
-
   end
-
-end
-
-
-
 end

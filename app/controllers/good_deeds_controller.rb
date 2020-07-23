@@ -38,11 +38,10 @@ end
 
 # route should send us to good_deeds/edit.erb
 # render an edit form
-get '/journal_entries/:id/edit' do
-  redirect_if_not_logged_in
-  set_journal_entry
-  if authorized_to_edit?(@journal_entry)
-    erb :'/journal_entries/edit'
+get '/good_deeds/:id/edit' do
+  set_good_deed_entry
+  if authorized_to_edit?(@good_deed)
+    erb :'/good_deeds/edit'
   else
     redirect "users/#{current_user.id}"
   end
