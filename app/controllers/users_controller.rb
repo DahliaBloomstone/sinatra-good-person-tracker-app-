@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+#GET - retrieve information
+#POST - create a new resource
+#DELETE - delete resources
+#PATCH - partial update on a resource
+
 
 # what routes do I need for login?
 # route: render the login page
@@ -12,7 +17,7 @@ class UsersController < ApplicationController
   post '/login' do
   @user = User.find_by(email: params[:email])
   if @user && @user.authenticate(params[:password])
-    session[:user_id] = @user.id #actually logging the user in
+    session[:user_id] = @user.id #actually logging the user in, session Id is set to the id of thta user 
     puts session
     flash[:message] = "Hello There, #{@user.name}!"
     redirect "users/#{@user.id}"
