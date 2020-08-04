@@ -11,7 +11,7 @@ To try this app out:
 - 'shotgun' and copy and paste into your browser
 
 Contributing
-Bug reports and pull requests are welcome on GitHub at https://github.com/alexisadorn/Sinatra-Adventure-Bucket-List.
+Bug reports and pull requests are welcome on GitHub 
 
 License
 The project is available as open source under the terms of the MIT License.
