@@ -1,5 +1,6 @@
 class GoodDeedsController < ApplicationController
   #binding.pry self.class => GoodDeedsController
+  #a route is simply an HTTP method/verb that is paired with a URL-matching pattern
 
 get '/good_deeds' do
   @good_deeds = GoodDeed.all #instance variable to access the corresponding view
@@ -31,6 +32,9 @@ end
 end
 
 # show route for a good deed entry
+# dynamic route :
+# sinatra matches a request to a specific controller action
+# ex: 1 is an id parameter that is being passed into the path 
 get '/good_deeds/:id' do
 set_good_deed_entry
 # binding.pry
@@ -68,10 +72,9 @@ end
 # binding.pry
 # in browser: http://167.99.15.173:44406/good_deeds/1/edit, =>  {"_method"=>"patch","content"=>"I recycled.\" only a little bit though.", "id"=>"1"}
 # Added the ability to edit an entry:
-
 delete '/good_deeds/:id' do
   set_good_deed_entry
-  if authorized_to_edit?(@good_deed)
+  if authorized_to_edit?(@good_deed) # users can edit and delete only their own good deeds
     @good_deed.destroy
     flash[:message] = "Yay! You deleted your good deed entry"
     #delete the entry, go somewhere..redirect. Why redirect? separation of concerns
