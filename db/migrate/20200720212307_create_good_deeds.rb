@@ -4,7 +4,8 @@ class CreateGoodDeeds < ActiveRecord::Migration
       t.string :content
       t.integer :user_id
       
-      t.timestamps null: false
+      t.timestamps null: false #t.timestamps null :false gives me timestamps everytime we create or update a model. 
+
     end
   end
 end
