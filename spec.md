@@ -46,7 +46,7 @@ x You don't include changes in a commit that aren't related to the commit messag
 PRIORITIZING:
 
 ORMs and ActiveRecord Unit: Migrations, CRUD Intro, and Associations
-1. Migrations are what we write to make changes to our database.
+1. Migrations are what we write to make changes to our database. Tells AR columns and tables.
 2. The schema changes when we create a new table and run rake db:migrate
   Schema also changes when we update an existing table and run rake db:migrate.
 3. Tux: how we access objects through ActiveRecord associations defined in our models.
