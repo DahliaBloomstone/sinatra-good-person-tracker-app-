@@ -8,3 +8,5 @@ class CreateGoodDeeds < ActiveRecord::Migration
     end
   end
 end
+
+#attributes: content, user_id
