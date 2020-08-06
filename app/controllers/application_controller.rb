@@ -2,20 +2,21 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
+  #configure do block 
   configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
-    enable :sessions
-    set :session_secret, "good_person_tracker"
+    set :public_folder, 'public' #relates to images in a public folder, telling sinatra this is where they live 
+    set :views, 'app/views' #this is where sinatra is going to look when I render files 
+    enable :sessions #access to a hash called session that we can manipulate 
+    set :session_secret, "good_person_tracker" #session id created for particular session, extra layer of security 
     register Sinatra::Flash
   end
 
   get "/" do
   #  binding.pry
     if logged_in?
-      redirect "/users/#{current_user.id}"
+      redirect "/users/#{current_user.id}" #if user is logged in, their session will be saved in the app by their user id
     else
-    erb :welcome
+    erb :welcome #else, they are shown the welcome page 
   end
 end
 
