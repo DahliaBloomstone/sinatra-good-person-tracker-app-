@@ -1,3 +1,4 @@
+#Inherits from ApplicationController: all helper methods and Sinatra::Base
 class UsersController < ApplicationController
 #GET - retrieve information
 #POST - create a new resource
@@ -15,12 +16,12 @@ class UsersController < ApplicationController
 # receive the login form, find the user, log user in
 # Steps: Find user, authenticate user, log in user, redirect to user landing page
   post '/login' do
-  @user = User.find_by(email: params[:email])
-  if @user && @user.authenticate(params[:password])
-    session[:user_id] = @user.id #actually logging the user in, session Id is set to the id of thta user 
-    puts session
+  @user = User.find_by(email: params[:email]) #find user by email 
+  if @user && @user.authenticate(params[:password]) #authenticating user by password 
+    session[:user_id] = @user.id  #key, value pair to the session hash. actually logging the user in, session Id is set to the id of that user.
+    puts session #app knows user while user is logged in
     flash[:message] = "Hello There, #{@user.name}!"
-    redirect "users/#{@user.id}"
+    redirect "users/#{@user.id}" #interpolate - pass in users id  
   else
     flash[:errors] = "Invalid Login! Sign up or try again!"
     redirect '/login'
@@ -40,12 +41,12 @@ class UsersController < ApplicationController
     # params will look like: => {"name"=>"Poop", "email"=>"Poop@gmail.com", "password"=>"password "}
     @user = User.new(params) # new vs create. create=saves/persists in database. new=instantiates new object.
   if @user.save
-    session[:user_id] = @user.id #logging user in
+    session[:user_id] = @user.id #logging user in, saving user id for the session while they are logged in 
     redirect "/users/#{@user.id}" #redirect - url - new get/http request; interpolate
 flash[:message] = "Welcome new user, #{@user.name}! You have a new good person tracker account!"
   else
     # binding.pry
-    # => {"name"=>"", "email"=>"ooo", "password"=>""}
+    # => {"name"=>"", "email"=>"ooo", "password"=>""} example, if we have an empty name/password, error message 
     flash[:errors] = "Failed to create a new account: #{@user.errors.full_messages.to_sentence} :("
     #not a valid input
     redirect '/signup'
