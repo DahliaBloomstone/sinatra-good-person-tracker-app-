@@ -60,7 +60,8 @@ A SESSION: an object, like a hash, that stores data describing a clients interac
 MORE NOTES...
 We inherit from ActiveRecord::Migration which allows for implementing basic CRUD actions using Sinatra. 
 
-Why do we use password_digest? bcrypt. salts the passwords. encrypted passwords. -> has_secure_password. AR authenticate. 
+Why do we use password_digest? bcrypt. salts the passwords. encrypted passwords. -> has_secure_password. AR authenticate.
+can just put password in the controllers and views. 
 
 t.timestamps null :false gives me timestamps everytime we create or update a model. 
 
@@ -70,4 +71,10 @@ t.integer :user_id: has many and belongs to relationships/associations/active re
 
 logging the user in = creating the user session. enable the session in the application controller. 
 
+Redirect = send a get request, separation of concerns - every route should have one job. So if we are in a post request, redirect to a get request so it does its one job and the get request does its one job. Render = happen from a get request.
+
+action of a form = post request, http verb, creates something in the database, restful convention 
+
+  get '/users/:slug ' do ... slug vs id 
+ slug is often an instance method on the user 
 
