@@ -49,9 +49,25 @@ ORMs and ActiveRecord Unit: Migrations, CRUD Intro, and Associations
 1. Migrations are what we write to make changes to our database. Tells AR columns and tables.
 2. The schema changes when we create a new table and run rake db:migrate
   Schema also changes when we update an existing table and run rake db:migrate.
-3. Tux: how we access objects through ActiveRecord associations defined in our models.
+3. Tux: how we access objects through ActiveRecord associations defined in our models. Can perform all CRUD operations through the terminal. 
 Ex: User.first
 => <User id: 1, name: "Dahlia", email: "dahliabloomstone@gmail.com", password_digest: "$2a$12$4Xh
 1lWMFNl9esGYzJ7LsvO5iULmnMZhbBiZYwOZOmK5...", created_at: "2020-07-20 21:40:03", updated_at: "20
 
-A SESSION: an object, like a hash, that stores data describing a clients interactions with a website at a given point in time 
+A SESSION: an object, like a hash, that stores data describing a clients interactions with a website at a given point in time. When a user logs in, we store a USER ID in a session hash. the user id is stored as a value of session[:user_id]= for the whole session the app will know who the user is. 
+
+
+MORE NOTES...
+We inherit from ActiveRecord::Migration which allows for implementing basic CRUD actions using Sinatra. 
+
+Why do we use password_digest? bcrypt. salts the passwords. encrypted passwords. -> has_secure_password. AR authenticate. 
+
+t.timestamps null :false gives me timestamps everytime we create or update a model. 
+
+RESTFUL routes - app recieves HTTP request, introspects on that request and identifies HTTP method and URL, connects with a controller action that has that method and URL, executes code in that action, determines which response to send back to the client 
+
+t.integer :user_id: has many and belongs to relationships/associations/active record macros 
+
+logging the user in = creating the user session. enable the session in the application controller. 
+
+
