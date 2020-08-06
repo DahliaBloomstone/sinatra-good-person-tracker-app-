@@ -9,7 +9,7 @@ class CreateUsersTable < ActiveRecord::Migration
   end
 end
 
-
+# attributes: name, email, password_digest 
 
 # Why do we use the bcrypt gem and what is the significance of adding the password_digest column to the User model in the database?
 # To avoid passwords from being stolen, the password is encrypted before stored in your database. This is done by bcrypt Ruby gem.
